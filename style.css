@@ -1,0 +1,67 @@
+/* Stile di base per l'intera pagina per rimuovere margini e padding */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Colore di sfondo per un look pulito */
+}
+
+/* Contenitore della mappa */
+#map {
+    height: 80vh;        /* Imposta la mappa al 80% dell'altezza della finestra */
+    width: 100%;         /* Larghezza al 100% del contenitore */
+    margin-top: 10px;
+    border: 2px solid #ddd; /* Bordo sottile per distinguere la mappa */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leggera ombra per un effetto 3D */
+}
+
+/* Stile dei popup dei marker */
+.leaflet-popup-content-wrapper {
+    background-color: #fff;        /* Sfondo bianco per i popup */
+    border-radius: 8px;            /* Bordo arrotondato */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+    padding: 10px;                 /* Spaziatura interna */
+}
+
+.leaflet-popup-content {
+    font-size: 14px;               /* Dimensione del testo */
+    color: #333;                   /* Colore del testo */
+    text-align: center;            /* Testo centrato */
+}
+
+/* Stile per il bottone di invio e per gli input */
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#via, #invia {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+#invia {
+    background-color: #4CAF50;  /* Colore verde per il pulsante */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#invia:hover {
+    background-color: #45a049;  /* Colore più scuro al passaggio del mouse */
+}
+
+/* Stile per il link di attribuzione di OpenStreetMap */
+.leaflet-control-attribution a {
+    color: #0077cc; /* Colore blu per i link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+.leaflet-control-attribution a:hover {
+    text-decoration: underline; /* Sottolinea i link al passaggio del mouse */
+}
