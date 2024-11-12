@@ -2,8 +2,7 @@ let myKey="mappe";
 let myToken="eee8fe52-399b-49a0-be7e-0d8f2bf5e450";
 const prendiDati = (via) => {
     return new Promise((resolve, reject) => {
-        //console.log("https://us1.locationiq.com/v1/search?key=pk.6ce44662827952ac04f47a6165745bb3&q="+via+","+citta +"&format=json&"
-//);
+       
         fetch("https://us1.locationiq.com/v1/search?key=pk.6ce44662827952ac04f47a6165745bb3&q="+via +"&format=json&"
             
         )
@@ -121,13 +120,13 @@ let placess = [
  render();
  const viaInput=document.getElementById("via");
  //const cittaInput=document.getElementById("città");
- const InviaInput=document.getElementById("invia");
+ //const InviaInput=document.getElementById("invia");
 
 
 
  InviaInput.onclick=()=>{
-    console.log(cittaInput);
-    let viaT= viaInput.value;
+   // console.log(cittaInput);
+  //  let viaT= viaInput.value;
     //let cittaT=cittaInput.value;
     viaInput.value="";
     cittaInput.value="";
