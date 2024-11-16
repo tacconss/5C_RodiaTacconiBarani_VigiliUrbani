@@ -1,3 +1,4 @@
+// Funzione per creare il modal
 function createIncidentModal() {
   if (!document.getElementById("incidentModal")) {
     const modalHTML = `
@@ -46,23 +47,33 @@ function createIncidentModal() {
   }
 }
 
-// Aggiungere evento al pulsante
-document.getElementById("Aggiungi").addEventListener("click", () => {
-  createIncidentModal();
-  $("#incidentModal").modal("show"); 
 
-  document.getElementById("submitIncident").addEventListener("click", async () => {
-    const incident = {
-      address: document.getElementById("incidentAddress").value,
-      plates: document.getElementById("incidentPlates").value.split(',').map(plate => plate.trim()).slice(0, 3),
-      dateTime: document.getElementById("incidentDateTime").value,
-      injuries: parseInt(document.getElementById("incidentInjuries").value, 10) || 0,
-      deaths: parseInt(document.getElementById("incidentDeaths").value, 10) || 0,
+window.onload = function() {
+  const aggiungiButton = document.getElementById("Aggiungi");
+  if (aggiungiButton) {
+    aggiungiButton.onclick = function() {
+      createIncidentModal();
+      $("#incidentModal").modal("show");
+
+      
+      const submitButton = document.getElementById("submitIncident");
+      if (submitButton) {
+        submitButton.onclick = async function() {
+          const incident = {
+            //Qua caricati i dati
+            address: document.getElementById("incidentAddress").value,
+            plates: document.getElementById("incidentPlates").value.split(',').map(plate => plate.trim()).slice(0, 3),
+            dateTime: document.getElementById("incidentDateTime").value,
+            injuries: parseInt(document.getElementById("incidentInjuries").value, 10) || 0,
+            deaths: parseInt(document.getElementById("incidentDeaths").value, 10) || 0,
+          };
+
+          console.log("Dati dell'incidente:", incident);
+          
+          
+          $("#incidentModal").modal("hide");
+        };
+      }
     };
-
-    console.log("Dati dell'incidente:", incident);
-
-    
-    $("#incidentModal").modal("hide");
-  });
-});
+  }
+};
