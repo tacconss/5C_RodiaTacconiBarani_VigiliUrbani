@@ -32,7 +32,7 @@ const prendiDatiCache = (chiave, token) => {
       })
         .then(r => r.json())
         .then(r => {
-          //  console.log(r);
+            console.log(r);
           const data = JSON.parse(r.result);
           resolve(data);
         })
@@ -52,6 +52,8 @@ const salvaDati = (morti,feriti,data,luogo, long, lat ) => {
           "Feriti: "+feriti+"\n"+
           "Morti: "+morti+"\n"+
           "Data: "+data+"\n";
+          console.log("VECCHI");
+          console.log(vecchiDati);
           const nuoviDati = [
             ...vecchiDati,{
             "name": titolo,
@@ -83,7 +85,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat ) => {
     });
 }
 
-
+//[{name: "Piazza del Duomo Feriti: 3 Morti: 1 Data: 10/10/2024 ",coords: [45.4639102, 9.1906426]}]
 
 
 let placess = [
@@ -112,9 +114,9 @@ let placess = [
     prendiDatiCache().then((places)=>{
        // console.log("risultato" );
         console.log(placess );
-      places.forEach((placess) => {
-    const marker = L.marker(place.coords).addTo(map);
-    marker.bindPopup(`<b>${place.name}</b>`);
+      placess.forEach((placess) => {
+    const marker = L.marker(placess.coords).addTo(map);
+    marker.bindPopup(`<b>${placess.name}</b>`);
  });
  });
 
