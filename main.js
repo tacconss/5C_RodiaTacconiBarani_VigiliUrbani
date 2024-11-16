@@ -44,10 +44,14 @@ const prendiDatiCache = (chiave, token) => {
 
 
 
-const salvaDati = (titolo, long, lat ) => {
+const salvaDati = (morti,feriti,data,luogo, long, lat ) => {
     return new Promise((resolve, reject) => {
         prendiDatiCache(myKey, myToken)// prima di salvare i nuovi dati prendi i veccchi dati 
         .then(vecchiDati => {
+          let titolo="Luogo: "+luogo+"\n"+
+          "Feriti: "+feriti+"\n"+
+          "Morti: "+morti+"\n"+
+          "Data: "+data+"\n";
           const nuoviDati = [
             ...vecchiDati,{
             "name": titolo,
@@ -65,7 +69,7 @@ const salvaDati = (titolo, long, lat ) => {
             },
             body: JSON.stringify({
               key: myKey,
-              value: JSON.stringify(nuoviDati)
+              value: JSON.stringify({nuoviDati})
             })
           })
             .then(r => r.json())
@@ -84,7 +88,10 @@ const salvaDati = (titolo, long, lat ) => {
 
 let placess = [
     {
-       name: "Piazza del Duomo",
+       name: "Piazza del Duomo"+"\n"+
+       "Feriti: 3"+"\n"+
+       "Morti: 1"+"\n"+
+       "Data: 10/10/2024 ",
        coords: [45.4639102, 9.1906426]
     }
  ];
@@ -104,8 +111,8 @@ let placess = [
  function render(){
     prendiDatiCache().then((places)=>{
        // console.log("risultato" );
-        console.log(places );
- places.forEach((place) => {
+        console.log(placess );
+      places.forEach((placess) => {
     const marker = L.marker(place.coords).addTo(map);
     marker.bindPopup(`<b>${place.name}</b>`);
  });
@@ -118,9 +125,9 @@ let placess = [
 
 
  render();
- const viaInput=document.getElementById("via");
+ //const viaInput=document.getElementById("via");
  //const cittaInput=document.getElementById("città");
- //const InviaInput=document.getElementById("invia");
+ const InviaInput=document.getElementById("Aggiungi");
 
 
 
@@ -128,14 +135,18 @@ let placess = [
    // console.log(cittaInput);
   //  let viaT= viaInput.value;
     //let cittaT=cittaInput.value;
-    viaInput.value="";
-    cittaInput.value="";
-    prendiDati(viaT).then((responce)=>{
+   // viaInput.value="";
+   // cittaInput.value="";
+    prendiDati("via fiume 73,Vimodrone").then((responce)=>{
         let dim=responce.length;
         let valToUse=null;
         valToUse=responce[0];
         let long=valToUse["lon"];
         let lat=valToUse["lat"];
-        salvaDati(viaT+" "+cittaT,long, lat).then(render);
+        let  morti="0";
+        let feriti="0";
+        let data="10/10/2024";
+        let luogo="pIPPPO";
+        salvaDati(morti,feriti,data,luogo,long, lat).then(render);
     });
 }
