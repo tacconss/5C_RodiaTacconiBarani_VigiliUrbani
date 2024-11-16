@@ -1,5 +1,5 @@
 //Da cambiare con le promise
-
+/*
 function createBookingModal() {
     if (!document.getElementById("bookingModal")) {
       const modalHTML = `
@@ -129,4 +129,65 @@ function createBookingModal() {
   });
   
   }
-  
+  */
+
+function createIncidentModal() {
+  if (!document.getElementById("incidentModal")) {
+    const modalHTML = `
+      <div class="modal fade" id="incidentModal" tabindex="-1" role="dialog" aria-labelledby="incidentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="incidentModalLabel">Aggiungi Incidente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="incidentForm">
+                <div class="form-group">
+                  <label for="incidentType">Tipo di Incidente</label>
+                  <input type="text" class="form-control" id="incidentType" required>
+                </div>
+                <div class="form-group">
+                  <label for="incidentLocation">Luogo</label>
+                  <input type="text" class="form-control" id="incidentLocation" required>
+                </div>
+                <div class="form-group">
+                  <label for="incidentDate">Data</label>
+                  <input type="date" class="form-control" id="incidentDate" required>
+                </div>
+                <div class="form-group">
+                  <label for="incidentDescription">Descrizione</label>
+                  <textarea class="form-control" id="incidentDescription" rows="3" required></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+              <button type="button" class="btn btn-primary" id="submitIncident">Salva</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+}
+
+
+
+// Aggiungere evento al pulsante
+document.getElementById("Aggiungi").addEventListener("click", () => {
+  createIncidentModal();
+  $("#incidentModal").modal("show"); // Utilizzo di Bootstrap per mostrare la modale
+
+  document.getElementById("submitIncident").addEventListener("click", async () => {
+    const incident = {
+      type: document.getElementById("incidentType").value,
+      location: document.getElementById("incidentLocation").value,
+      date: document.getElementById("incidentDate").value,
+      description: document.getElementById("incidentDescription").value,
+    };
+  });
+});
