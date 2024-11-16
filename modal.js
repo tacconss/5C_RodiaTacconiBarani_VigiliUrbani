@@ -58,7 +58,7 @@ window.onload = function() {
       
       const submitButton = document.getElementById("submitIncident");
       if (submitButton) {
-        submitButton.onclick = async function() {
+        submitButton.onclick = function() {
           const incident = {
             //Qua caricati i dati
             address: document.getElementById("incidentAddress").value,
