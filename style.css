@@ -1,0 +1,142 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  #appContainer {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  
+  #map {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  /* Input e pulsanti */
+  input[type="text"], input[type="number"], input[type="date"] {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+    border-color: #0078d7;
+    outline: none;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #0078d7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+  
+  
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #f4f4f9;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .leaflet-popup-content {
+    line-height: 1.6;
+  }
+  
+  .leaflet-popup-tip {
+    background: #0078d7;
+  }
+  
+  
+  #incidentList {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #incidentList > div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #incidentList > div:last-child {
+    border-bottom: none;
+  }
+  
+  #incidentList strong {
+    font-size: 16px;
+    color: #0078d7;
+  }
+  
+  #incidentList p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  
+  @media (max-width: 768px) {
+    #map {
+      height: 300px;
+    }
+  
+    input[type="text"], input[type="number"], input[type="date"], button {
+      width: 100%;
+    }
+  }
+
+
+
+
+  
+  
