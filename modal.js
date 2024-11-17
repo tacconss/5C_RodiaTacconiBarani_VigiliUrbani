@@ -102,7 +102,8 @@ let indirizzoT=indirizzo.value;
 let dataT =data.value;
 let feritiT=feriti.value;
 let mortiT=morti.value;
-prendiDati("via fiume 73,Vimodrone").then((responce)=>{
+let cerca=indirizzoT+",Milano"
+prendiDati(cerca).then((responce)=>{
   let dim=responce.length;
   let valToUse=null;
   valToUse=responce[0];
@@ -112,7 +113,7 @@ prendiDati("via fiume 73,Vimodrone").then((responce)=>{
   salvaDati(mortiT,feritiT,dataT,indirizzoT,long, lat,targa_1T,targa_2T,targa_3T,).then(render);
 });
 }
-          console.log("Dati dell'incidente:", incident);
+        
           
           
           $("#incidentModal").modal("hide");
