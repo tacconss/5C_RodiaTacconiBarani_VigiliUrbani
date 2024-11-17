@@ -44,14 +44,17 @@ const prendiDatiCache = (chiave, token) => {
 
 
 
-const salvaDati = (morti,feriti,data,luogo, long, lat ) => {
+const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => {
     return new Promise((resolve, reject) => {
         prendiDatiCache(myKey, myToken)// prima di salvare i nuovi dati prendi i veccchi dati 
         .then(vecchiDati => {
-          let titolo="Luogo: "+luogo+"\n"+
-          "Feriti: "+feriti+"\n"+
-          "Morti: "+morti+"\n"+
-          "Data: "+data+"\n";
+          let titolo="Luogo: "+luogo+"-"+
+          "Feriti: "+feriti+"-"+
+          "Morti: "+morti+"-"+
+          "Data: "+data+"-"+
+          "Targa1: "+targa1+"-"+
+          "Targa1: "+targa2+"-"+
+          "Targa1: "+targa3+"-";
           console.log("VECCHI");
           console.log(vecchiDati);
           const nuoviDati = [
