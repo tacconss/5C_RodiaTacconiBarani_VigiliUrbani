@@ -131,23 +131,45 @@ let placess = [
     }
   }
 }
+ 
+ const render = () => {
+  prendiDatiCache(myKey, myToken).then((places) => {
+      console.log("Dati dalla cache:", places);
 
+      // Pulire la mappa per evitare duplicazione dei marker
+      map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+          }
+      });
+
+      // Tabella aggiornata
+      const tableData = placess.map((place) => {
+          const [lat, long] = place.coords;
+          const [luogo, feriti, morti, data, targa1, targa2, targa3] = place.name.split('-').map((item) => item.split(': ')[1]);
+          return [luogo, morti, feriti, data, targa1, targa2, targa3];
+      });
+
+      // Aggiornare la tabella
+      table1.build([["Indirizzo", "Morti", "Feriti", "Data", "Targa 1", "Targa 2", "Targa 3"], ...tableData]);
+      table1.render();
+
+      // Aggiungere i marker alla mappa
+      placess.forEach((place) => {
+          const marker = L.marker(place.coords).addTo(map);
+          marker.bindPopup(`<b>${place.name.replace(/-/g, '<br>')}</b>`);
+      });
+  }).catch((error) => {
+      console.error("Errore durante il recupero dei dati dalla cache:", error);
+  });
+};
+
+// Inizializzare la tabella
 const table1 = createTable(document.querySelector("#table1"));
 table1.build([["Indirizzo", "Morti", "Feriti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
 table1.render();
 
- function render(){
-    prendiDatiCache().then((places)=>{
-       // console.log("risultato" );
-        console.log(placess );
-      placess.forEach((placess) => {
-    const marker = L.marker(placess.coords).addTo(map);
-    marker.bindPopup(`<b>${placess.name}</b>`);
- });
- });
-
- }
-
+// Chiamare la funzione render per caricare i dati iniziali
 
  render();
  //const viaInput=document.getElementById("via");
