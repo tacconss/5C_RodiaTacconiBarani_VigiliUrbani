@@ -93,7 +93,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
 
 let placess = [
     {
-       name: "Piazza del Duomo"+"\n"+
+       name: "Indirizzo: Piazza del Duomo"+"\n"+
        "Feriti: 3"+"\n"+
        "Morti: 1"+"\n"+
        "Data: 10/10/2024 ",
@@ -145,12 +145,12 @@ let placess = [
       // Tabella aggiornata
       const tableData = placess.map((place) => {
           const [lat, long] = place.coords;
-          const [luogo, feriti, morti, data, targa1, targa2, targa3] = place.name.split('-').map((item) => item.split(': ')[1]);
-          return [luogo, morti, feriti, data, targa1, targa2, targa3];
+          const [luogo, feriti, morti, data, targa1, targa2, targa3] = place.name.split('\n').map((item)=> item.split(':')[1]);
+          return [luogo, feriti, morti, data, targa1, targa2, targa3];
       });
 
       // Aggiornare la tabella
-      table1.build([["Indirizzo", "Morti", "Feriti", "Data", "Targa 1", "Targa 2", "Targa 3"], ...tableData]);
+      table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"], ...tableData]);
       table1.render();
 
       // Aggiungere i marker alla mappa
@@ -165,7 +165,7 @@ let placess = [
 
 // Inizializzare la tabella
 const table1 = createTable(document.querySelector("#table1"));
-table1.build([["Indirizzo", "Morti", "Feriti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
+table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
 table1.render();
 
 // Chiamare la funzione render per caricare i dati iniziali
@@ -193,7 +193,7 @@ table1.render();
         let feriti="0";
         let data="10/10/2024";
         let luogo="pIPPPO";
-        salvaDati(morti,feriti,data,luogo,long, lat).then(render);
+        salvaDati(feriti,morti,data,luogo,long, lat).then(render);
     });
 }
 // tabella indirizzo(civ compreso) morti feriti data e ora 3 targhe input box filtro (es piazza filtra per tutti le piazze)
