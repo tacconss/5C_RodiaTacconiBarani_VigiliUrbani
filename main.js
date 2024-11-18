@@ -112,6 +112,28 @@ let placess = [
     attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
  }).addTo(map);
 
+ const createTable = (parentElement) => {
+  let data;
+  return {
+    build: (dataInput) => {
+      data = dataInput;
+    },
+    render: () => {
+      let htmlTable = "<table>";
+      htmlTable += data.map((row) => 
+        "<tr>" + row.map((col) => 
+          "<td>" + col + "</td>"
+        ).join("")
+      ).join("") + "</tr>";
+      htmlTable += "</table";
+      parentElement.innerHTML = htmlTable;
+    }
+  }
+}
+
+const table1 = createTable(document.querySelector("#table1"));
+table1.build([["Cognome", "Voto"], ["Pogba", "6"], ["Vlahovic", 8], ["Thuram", 6.5]]);
+table1.render();
 
  function render(){
     prendiDatiCache().then((places)=>{
@@ -122,9 +144,6 @@ let placess = [
     marker.bindPopup(`<b>${placess.name}</b>`);
  });
  });
-
-
-
 
  }
 
@@ -155,3 +174,4 @@ let placess = [
         salvaDati(morti,feriti,data,luogo,long, lat).then(render);
     });
 }
+// tabella indirizzo(civ compreso) morti feriti data e ora 3 targhe input box filtro (es piazza filtra per tutti le piazze)
