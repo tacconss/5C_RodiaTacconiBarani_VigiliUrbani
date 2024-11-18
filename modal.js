@@ -112,10 +112,7 @@ prendiDati(cerca).then((responce)=>{
   
   salvaDati(mortiT,feritiT,dataT,indirizzoT,long, lat,targa_1T,targa_2T,targa_3T,).then(render);
 });
-}
-        
-          
-          
+}         
           $("#incidentModal").modal("hide");
         };
       }
