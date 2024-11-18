@@ -132,7 +132,7 @@ let placess = [
 }
 
 const table1 = createTable(document.querySelector("#table1"));
-table1.build([["Cognome", "Voto"], ["Pogba", "6"], ["Vlahovic", 8], ["Thuram", 6.5]]);
+table1.build([["Indirizzo", "Morti", "Feriti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
 table1.render();
 
  function render(){
