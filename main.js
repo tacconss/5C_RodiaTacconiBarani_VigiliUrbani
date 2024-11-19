@@ -59,7 +59,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
           console.log("VECCHI");
           console.log(vecchiDati);
           const nuoviDati = [
-            ...(vecchiDati.nuoviDati),{
+            ...(vecchiDati),{
             "name": titolo,
             "coords":[lat,long]
             }
