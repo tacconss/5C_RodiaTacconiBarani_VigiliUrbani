@@ -59,7 +59,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
           console.log("VECCHI");
           console.log(vecchiDati);
           const nuoviDati = [
-            ...vecchiDati,{
+            ...(vecchiDati.nuoviDati),{
             "name": titolo,
             "coords":[lat,long]
             }
@@ -75,7 +75,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
             },
             body: JSON.stringify({
               key: myKey,
-              value: JSON.stringify({nuoviDati})
+              value: JSON.stringify(nuoviDati)
             })
           })
             .then(r => r.json())
