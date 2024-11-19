@@ -92,26 +92,48 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
 //[{name: "Piazza del Duomo Feriti: 3 Morti: 1 Data: 10/10/2024 ",coords: [45.4639102, 9.1906426]}]
 
 
-let placess = [
-    {
-       name: "Indirizzo: Piazza del Duomo"+"\n"+
-       "Feriti: 3"+"\n"+
-       "Morti: 1"+"\n"+
-       "Data: 10/10/2024 ",
-       coords: [45.4639102, 9.1906426]
-    }
- ];
+let placess = [];
+const caricaPlacessDaCache = () => {
+  prendiDatiCache()
+      .then((data) => {
+          // Aggiorna l'array placess con i dati dalla cache
+          placess = data.map((item) => ({
+              name: item.name,
+              coords: item.coords
+          }));
+
+          console.log("Dati caricati in placess:", placess);
+
+          // Puoi aggiungere qui il codice per aggiornare la mappa, se necessario
+          renderMarkersOnMap(); // Chiama una funzione per visualizzare i marker
+      })
+      .catch((error) => {
+          console.error("Errore nel caricamento dei dati dalla cache:", error);
+      });
+};
+
+// Funzione per visualizzare i marker sulla mappa
+const renderMarkersOnMap = () => {
+  const zoom = 12;
+  const maxZoom = 19;
+  const map = L.map('map').setView(placess[0]?.coords || [0, 0], zoom);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: maxZoom,
+      attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  placess.forEach((place) => {
+      const marker = L.marker(place.coords).addTo(map);
+      marker.bindPopup(`<b>${place.name}</b>`);
+  });
+};
+
+// Carica i dati dalla cache al caricamento della pagina
+caricaPlacessDaCache();
  let zoom = 12;
  let maxZoom = 19;
  let map=null;
-
-
-
-  map = L.map('map').setView(placess[0].coords, zoom);
- L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: maxZoom,
-    attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
- }).addTo(map);
 
  const createTable = (parentElement) => {
   let data;
