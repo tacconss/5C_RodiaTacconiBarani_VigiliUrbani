@@ -54,8 +54,8 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
           "Morti: "+morti+"-"+
           "Data: "+data+"-"+
           "Targa1: "+targa1+"-"+
-          "Targa1: "+targa2+"-"+
-          "Targa1: "+targa3+"-";
+          "Targa2: "+targa2+"-"+
+          "Targa3: "+targa3+"-";
           console.log("VECCHI");
           console.log(vecchiDati);
           const nuoviDati = [
