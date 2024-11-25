@@ -94,22 +94,22 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
 
 let placess = [];
 const caricaPlacessDaCache = () => {
-  prendiDatiCache()
-      .then((data) => {
-          // Aggiorna l'array placess con i dati dalla cache
-          placess = data.map((item) => ({
-              name: item.name,
-              coords: item.coords
-          }));
-
-          console.log("Dati caricati in placess:", placess);
-
-          // Puoi aggiungere qui il codice per aggiornare la mappa, se necessario
-          renderMarkersOnMap(); // Chiama una funzione per visualizzare i marker
-      })
-      .catch((error) => {
-          console.error("Errore nel caricamento dei dati dalla cache:", error);
-      });
+    return new Promise((resolve, reject) => {
+        prendiDatiCache(myKey, myToken)
+            .then((data) => {
+                // Aggiorna l'array placess con i dati dalla cache
+                placess = data.map((item) => ({
+                    name: item.name,
+                    coords: item.coords,
+                }));
+                console.log("Dati caricati in placess:", placess);
+                resolve(placess);
+            })
+            .catch((error) => {
+                console.error("Errore nel caricamento dei dati dalla cache:", error);
+                reject(error);
+            });
+    });
 };
 
 // Funzione per visualizzare i marker sulla mappa
@@ -154,42 +154,67 @@ caricaPlacessDaCache();
   }
 }
  
- const render = () => {
-  prendiDatiCache(myKey, myToken).then((places) => {
-      console.log("Dati dalla cache:", places);
-
-      // Pulire la mappa per evitare duplicazione dei marker
-      map.eachLayer((layer) => {
-          if (layer instanceof L.Marker) {
-              map.removeLayer(layer);
-          }
-      });
-
-      // Tabella aggiornata
-      const tableData = placess.map((place) => {
-          const [lat, long] = place.coords;
-          const [luogo, feriti, morti, data, targa1, targa2, targa3] = place.name.split('\n').map((item)=> item.split(':')[1]);
-          return [luogo, feriti, morti, data, targa1, targa2, targa3];
-      });
+const render = () => {
+  caricaPlacessDaCache().then(() => {
+      // Pulire i marker dalla mappa
+      if (map) {
+          map.eachLayer((layer) => {
+              if (layer instanceof L.Marker) {
+                  map.removeLayer(layer);
+              }
+          });
+      } else {
+          // Inizializzare la mappa se non esiste
+          map = L.map("map").setView(placess[0]?.coords || [0, 0], zoom);
+          L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              maxZoom: maxZoom,
+              attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          }).addTo(map);
+      }
 
       // Aggiornare la tabella
+      const tableData = placess.map((place) => {
+          const details = place.name.split("-").reduce((acc, item) => {
+              const [key, value] = item.split(":").map((str) => str.trim());
+              acc[key.toLowerCase()] = value || "";
+              return acc;
+          }, {});
+          return [
+              details.luogo || "",
+              details.feriti || "0",
+              details.morti || "0",
+              details.data || "",
+              details.targa1 || "",
+              details.targa2 || "",
+              details.targa3 || "",
+          ];
+      });
+
+      const table1 = createTable(document.querySelector("#table1"));
+table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
+table1.render();
+
       table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"], ...tableData]);
       table1.render();
 
       // Aggiungere i marker alla mappa
       placess.forEach((place) => {
           const marker = L.marker(place.coords).addTo(map);
-          marker.bindPopup(`<b>${place.name.replace(/-/g, '<br>')}</b>`);
+          marker.bindPopup(`<b>${place.name.replace(/-/g, "<br>")}</b>`);
       });
-  }).catch((error) => {
-      console.error("Errore durante il recupero dei dati dalla cache:", error);
   });
 };
 
+
+
+      // Aggiungere i marker alla mappa
+      placess.forEach((place) => {
+          const marker = L.marker(place.coords).addTo(map);
+          marker.bindPopup(`<b>${place.name.replace(/-/g, '<br>')}</b>`);
+      });
+
 // Inizializzare la tabella
-const table1 = createTable(document.querySelector("#table1"));
-table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"]]);
-table1.render();
+
 
 // Chiamare la funzione render per caricare i dati iniziali
 
