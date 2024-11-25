@@ -89,8 +89,111 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
     });
 }
 
-//[{name: "Piazza del Duomo Feriti: 3 Morti: 1 Data: 10/10/2024 ",coords: [45.4639102, 9.1906426]}]
+const register=(username, password)=>{
+  return new Promise((resolve, reject) => {
+    fetch("https://ws.cipiaceinfo.it/credential/register", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "key": token
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    })
+    .then(r => r.json())
+    .then(data => resolve(data.result))
+    .catch(err => reject(err.result));
+});
+}
 
+document.getElementById("loginButton").onclick = () => {
+  const username = document.getElementById("usernameInput").value;
+  const password = document.getElementById("passwordInput").value;
+
+  if (username && password) {
+      login(username, password)
+      .then(r => {
+          let loginResultLabel = document.getElementById("loginResultLabel") ;
+          if (r) {
+              sessionStorage.setItem("logged", true);
+              isLogged = true;
+              document.getElementById("usernameInput").value = "";
+              document.getElementById("passwordInput").value = "";
+
+              document.querySelectorAll("." + privateClass).forEach(e => {
+                  e.classList.remove("d-none");
+              });
+              
+              loginResultLabel.classList.add("text-success") ;
+              loginResultLabel.classList.remove("text-danger") ;
+              loginResultLabel.innerText = "Login effettuato con successo" ;
+
+              setTimeout(() => {
+                  document.getElementById("loginContainer").classList.add("d-none");
+              }, 1500) ;
+
+          } else {
+              loginResultLabel.classList.add("text-danger") ;
+              loginResultLabel.classList.remove("text-success") ;
+              loginResultLabel.innerText = "Nome utente o password errati!" ;
+          }
+      })
+      .catch(err => {
+          console.log(err) ;
+      });
+  }
+};
+
+//[{name: "Piazza del Duomo Feriti: 3 Morti: 1 Data: 10/10/2024 ",coords: [45.4639102, 9.1906426]}]
+const createLogin = (username, password) => {
+  const myToken = "XXXXXXXXXXXXXXXX"; // token ottenuto via mail 
+  const inputName = document.querySelector("#name");
+  const inputPassword = document.querySelector("#password");
+  const loginButton = document.querySelector("#login");
+  const divPrivate = document.querySelector("#private");
+  const divLogin = document.querySelector("#login");
+
+  divPrivate.classList.remove(".visible");
+  divPrivate.classList.add(".hidden");
+  isLogged = sessionStorage.getItem("Logged") || false;
+
+  const login = (name, password) => {
+    return new Promise((resolve, reject) => {
+      fetch("http://ws.cipiaceinfo.it/credential/login", { 
+        method: "POST",
+        headers: {
+           "content-type": "application/json",
+           "key": myToken
+        },
+        body: JSON.stringify({
+           username: username,
+           password: password
+        })
+      })
+      .then(r => r.json())
+      .then(r => {
+           resolve(r.result); 
+        })
+      .catch(reject);
+    })
+  }
+
+  loginButton.onclick = () => {
+    login(input.name, input.password).then((result) => {
+      if (login) {
+        isLogged = true;
+        sessionStorage.setItem("Logged"== true);
+      }
+    });
+  }
+
+  return {
+    isLogged: () => isLogged
+  }
+
+  }
 
 let placess = [];
 const caricaPlacessDaCache = () => {
