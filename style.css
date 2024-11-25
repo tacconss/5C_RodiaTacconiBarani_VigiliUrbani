@@ -1,161 +1,166 @@
+/* Stile generale */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f0f0f0;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #333;
 }
-.table-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+/* Contenitore principale */
+#appContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
 }
+
+/* Mappa centrata */
+#map {
+  flex: 1;
+  max-width: 600px;  /* Aumento della larghezza */
+  height: 600px;     /* Aumento dell'altezza */
+  margin: auto;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.2);
+  border: 4px solid #007bff;
+}
+
+/* Contenitore destro */
+#tableContainer {
+  flex-grow: 2; /* Aumento della sezione destra */
+  height: 100%;
+  overflow-y: auto;
+  padding: 30px;  /* Aumento del padding per più spazio */
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #ddd;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per i controlli */
+.controls {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.controls input,
+.controls button {
+  margin: 10px;
+  padding: 12px 18px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.controls input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+.controls button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: #0056b3;
+}
+
+/* Stile per la tabella */
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
+
+thead {
+  background-color: #343a40;
+  color: white;
 }
+
+th,
+td {
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
 th {
-    background-color: #f4f4f4;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 16px;
 }
-  
+
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Pulsanti interni alla tabella */
+.table-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   #appContainer {
-    max-width: 1200px;
-    width: 100%;
-    margin: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  
-  
-  #map {
-    width: 100%;
-    max-width: 800px;
-    height: 500px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  .controls {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-  
-  /* Input e pulsanti */
-  input[type="text"], input[type="number"], input[type="date"] {
-    width: 250px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease;
-  }
-  
-  input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
-    border-color: #0078d7;
-    outline: none;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #0078d7;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #005bb5;
-    transform: translateY(-2px);
-  }
-  
-  button:active {
-    transform: translateY(0);
-  }
-  
-  
-  .leaflet-popup-content-wrapper {
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    background: #f4f4f9;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .leaflet-popup-content {
-    line-height: 1.6;
-  }
-  
-  .leaflet-popup-tip {
-    background: #0078d7;
-  }
-  
-  
-  #incidentList {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  #incidentList > div {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  #incidentList > div:last-child {
-    border-bottom: none;
-  }
-  
-  #incidentList strong {
-    font-size: 16px;
-    color: #0078d7;
-  }
-  
-  #incidentList p {
-    margin: 5px 0;
-    color: #555;
-  }
-  
-  
-  @media (max-width: 768px) {
-    #map {
-      height: 300px;
-    }
-  
-    input[type="text"], input[type="number"], input[type="date"], button {
-      width: 100%;
-    }
+      flex-direction: column;
   }
 
-  
+  #map {
+      width: 100%;
+      height: 500px; /* Aumento dell'altezza per mobile */
+      max-width: none;
+  }
+
+  #tableContainer {
+      width: 100%;
+      height: auto;
+  }
+}
+
+/* Stile aggiuntivo per migliorare l'interattività */
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+}
+
+tbody tr:hover td {
+  background-color: #e7f3ff;
+}
