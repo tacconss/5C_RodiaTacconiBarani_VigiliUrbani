@@ -88,7 +88,7 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
     
     });
 }
-
+/*
 const register=(username, password)=>{
   return new Promise((resolve, reject) => {
     fetch("https://ws.cipiaceinfo.it/credential/register", {
@@ -145,7 +145,7 @@ document.getElementById("loginButton").onclick = () => {
       });
   }
 };
-
+*/
 //[{name: "Piazza del Duomo Feriti: 3 Morti: 1 Data: 10/10/2024 ",coords: [45.4639102, 9.1906426]}]
 const createLogin = (username, password) => {
   const myToken = "XXXXXXXXXXXXXXXX"; // token ottenuto via mail 
