@@ -22,24 +22,24 @@ body {
 
 /* Mappa quadrata e sempre sul lato sinistro */
 #map {
-  flex: none; /* La mappa occupa una dimensione fissa */
-  width: 100%; /* Adatta la larghezza al contenitore */
-  max-width: 600px; /* Limite massimo per la larghezza */
-  height: auto; /* Altezza dinamica */
-  aspect-ratio: 1 / 1; /* Imposta il rapporto quadrato */
+  flex: none; 
+  width: 100%; 
+  max-width: 600px;
+  height: auto; 
+  aspect-ratio: 1 / 1; 
   background-color: #e9ecef;
   border-radius: 10px;
   box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.2);
   border: 4px solid #007bff;
-  margin: 20px; /* Margine per distanziarla dal contenitore */
+  margin: 20px; 
 }
 
 /* Contenitore destro */
 #tableContainer {
-  flex-grow: 2; /* Aumento della sezione destra */
+  flex-grow: 2; 
   height: 100%;
   overflow-y: auto;
-  padding: 30px; /* Aumento del padding per più spazio */
+  padding: 30px;
   background: #ffffff;
   display: flex;
   flex-direction: column;
@@ -149,7 +149,7 @@ tbody tr:hover {
       width: 100%;
       aspect-ratio: 1 / 1; /* Mantiene sempre il rapporto quadrato */
       max-width: none;
-      margin: 0 auto 20px auto; /* Centra la mappa */
+      margin: 0 auto 20px auto; 
   }
 
   #tableContainer {

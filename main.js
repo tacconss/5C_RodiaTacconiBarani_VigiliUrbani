@@ -1,15 +1,6 @@
 let myKey="mappe";
 let myToken="eee8fe52-399b-49a0-be7e-0d8f2bf5e450";
 
-const inputName = document.querySelector("#name");
-const inputPassword = document.querySelector("#password");
-const loginButton = document.querySelector("#loginButton");
-const registerButton= document.querySelector("#register");
-//const loginInput = document.querySelector("#login");
-const form = document.querySelector("#form");
-const divPrivate = document.querySelector("#private");
-const divLogin = document.querySelector("#login");
-let isLogged = false;
 
 const prendiDati = (via) => {
     return new Promise((resolve, reject) => {
@@ -47,7 +38,7 @@ const prendiDatiCache = (chiave, token) => {
 
 const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => {
     return new Promise((resolve, reject) => {
-        prendiDatiCache(myKey, myToken)// prima di salvare i nuovi dati prendi i veccchi dati 
+        prendiDatiCache(myKey, myToken)
         .then(vecchiDati => {
           let titolo="Luogo: "+luogo+"-"+
           "Feriti: "+feriti+"-"+
@@ -89,12 +80,14 @@ const salvaDati = (morti,feriti,data,luogo, long, lat,targa1,targa2,targa3 ) => 
 }
 
 const createLogin = () =>{
-  /*const inputName = document.querySelector("#name");
+  const inputName = document.querySelector("#name");
   const inputPassword = document.querySelector("#password");
-  const loginButton = document.querySelector("#login");
+  const loginButton = document.querySelector("#loginButton");
+  const registerButton= document.querySelector("#register");
+  const form = document.querySelector("#form");
   const divPrivate = document.querySelector("#private");
   const divLogin = document.querySelector("#login");
-  */
+  let isLogged = false;
 
   divPrivate.classList.remove(".visible");
   divPrivate.classList.add(".hidden");
@@ -135,7 +128,7 @@ const createLogin = () =>{
         console.log("Registrazione completata:", result);
         if (result) {
             console.log("Effettua il login con le nuove credenziali.");
-            //alert("Registrazione avvenuta con successo! Effettua il login.");
+            alert("Registrazione avvenuta con successo! Effettua il login.");
         } else {
             console.error("Errore durante la registrazione.");
         }
@@ -183,7 +176,6 @@ const createLogin = () =>{
               isLogged = true;
               divLogin.classList.add("hidden");
               form.classList.remove("hidden");
-              //form.classList.add("visible");
           } else {
               console.error("Login fallito.");
           }
@@ -301,14 +293,13 @@ const render = () => {
       table1.build([["Indirizzo", "Feriti", "Morti", "Data", "Targa 1", "Targa 2", "Targa 3"], ...tableData]);
       table1.render();
 
-      // Aggiungere i marker alla mappa
       placess.forEach((place) => {
           const marker = L.marker(place.coords).addTo(map);
           marker.bindPopup(`<b>${place.name.replace(/-/g, "<br>")}</b>`);
       });
   });
 };
-      // Aggiungere i marker alla mappa
+
       placess.forEach((place) => {
           const marker = L.marker(place.coords).addTo(map);
           marker.bindPopup(`<b>${place.name.replace(/-/g, '<br>')}</b>`);
