@@ -167,3 +167,11 @@ button:active {
 tbody tr:hover td {
   background-color: #e7f3ff;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
