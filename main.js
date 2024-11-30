@@ -12,8 +12,22 @@ const prendiDati = (via) => {
         })
         .catch(error => reject(error));
     });
-};
+};ricerca(document.getElementById("RICERCA"));
+ const ricerca=(inputres)=>{
+if(inputres.value!== null||inputres.value!== undefined){
+  let fin={};
+  let val=inputres.value;
+  prendiDatiCache(myKey, myToken)
+  .then(vecchiDati => {
+  vecchiDati.forEach(function(diz){
+  if(diz["name"].includes(val)){
+ fin+=diz;
+  }
+  })
+  });
+}
 
+}
 const prendiDatiCache = (chiave, token) => {
     return new Promise((resolve, reject) => {
       fetch('https://ws.cipiaceinfo.it/cache/get', {
